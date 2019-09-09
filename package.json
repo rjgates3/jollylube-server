@@ -1,5 +1,5 @@
 {
-  "name": "express-boilerplate",
+  "name": "Jolly Lube",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,6 @@
     "predeploy": "npm audit",
     "deploy": "git push heroku master"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -21,11 +20,13 @@
     "helmet": "^3.20.0",
     "morgan": "^1.9.1"
   },
-  
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
     "nodemon": "^1.19.1",
     "supertest": "^4.0.2"
+  },
+  "engines": {
+    "node": "10.16.3"
   }
 }
