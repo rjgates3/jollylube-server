@@ -1,0 +1,1 @@
+DROP TABLE IT EXISTS jollylube_users;

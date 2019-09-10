@@ -9,6 +9,9 @@ const { NODE_ENV } = require('./config');
 const validateBearerToken = require('./validateBearerToken.js');
 const errorHandler = require('./errorHandler');
 
+const authRouter = require('./auth/auth-router');
+const usersRouter = require('./users/users-router');
+
 const app = express();
 
 app.use(morgan((NODE_ENV === 'production')
@@ -17,11 +20,15 @@ app.use(morgan((NODE_ENV === 'production')
     skip: () => NODE_ENV === 'test'
 }));
 
-app.use(validateBearerToken);
-
 app.use(cors());
 app.use(helmet());
 
+app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
+
+app.use(validateBearerToken);
+
 app.use(errorHandler);
+
 
 module.exports = app;
