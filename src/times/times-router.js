@@ -34,7 +34,7 @@ timesRouter
         
         const newAptTime = { 
             apt_date: apt_date,
-            avaliable: true,
+            available: true,
         }
 
         TimesService.insertAptTime(
@@ -62,13 +62,13 @@ timesRouter
     })
     .patch(jsonParser, (req, res, next) => {
         
-        //check if apt time is avaliable
+        //check if apt time is available
 
         console.log(`${req.user.id}, ${typeof req.user.id}`);
         
         const newAptFields = {
           user_id: req.user.id
-          // avaliable: false
+          // available: false
         };
         
         TimesService.update(

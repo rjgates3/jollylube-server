@@ -33,13 +33,12 @@ const TimesService = {
         return {
             id: timeData.id,
             apt_date: xss(timeData.apt_date),
-            avaliable: xss(timeData.avaliable),
+            available: xss(timeData.available),
             user_id: timeData.user_id
         };
     },
     
     update(db, id, newAptFields) {
-        console.log('reaced times service');
         return db(dbTimesTable)
             .where({ id })
             .update(newAptFields)
