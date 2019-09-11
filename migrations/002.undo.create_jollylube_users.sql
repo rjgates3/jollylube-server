@@ -1,1 +1,1 @@
-DROP TABLE IT EXISTS jollylube_users;
+DROP TABLE IF EXISTS users;

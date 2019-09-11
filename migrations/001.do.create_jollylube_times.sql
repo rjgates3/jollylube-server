@@ -1,5 +1,5 @@
-CREATE TABLE jollylube_times (
+CREATE TABLE apt_times (
     id SERIAL PRIMARY KEY,
-    apt_date TIMESTAMP NOT NULL,
+    apt_date TIMESTAMPTZ NOT NULL,
     avaliable TEXT default NULL
 )

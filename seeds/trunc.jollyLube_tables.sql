@@ -1,4 +1,4 @@
 TRUNCATE
-    jollylube_users,
-    jollylube_times
+    users,
+    apt_times
     RESTART IDENTITY CASCADE;

@@ -11,6 +11,7 @@ const errorHandler = require('./errorHandler');
 
 const authRouter = require('./auth/auth-router');
 const usersRouter = require('./users/users-router');
+const timesRouter = require('./times/times-router');
 
 const app = express();
 
@@ -25,8 +26,9 @@ app.use(helmet());
 
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/times', timesRouter);
 
-app.use(validateBearerToken);
+// app.use(validateBearerToken);
 
 app.use(errorHandler);
 

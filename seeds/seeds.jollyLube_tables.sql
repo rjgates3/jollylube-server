@@ -1,11 +1,11 @@
 BEGIN;
 
 TRUNCATE
-    jollylube_users,
-    jollylube_times
+    users,
+    apt_times
     RESTART IDENTITY CASCADE;
 
-INSERT INTO jollylube_users (user_name, full_name, password)
+INSERT INTO users (user_name, full_name, password)
 VALUES
     ('dunder', 'Dunder Mifflin', '$2a$12$lHK6LVpc15/ZROZcKU00QeiD.RyYq5dVlV/9m4kKYbGibkRc5l4Ne'),
     ('b.deboop', 'Bodeep Deboop', '$2a$12$VQ5HgWm34QQK2rJyLc0lmu59cy2jcZiV6U1.bE8rBBnC9VxDf/YQO'),

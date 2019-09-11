@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS jollylub_times;
+DROP TABLE IF EXISTS apt_times;

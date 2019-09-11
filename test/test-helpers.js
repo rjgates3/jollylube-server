@@ -41,16 +41,16 @@ function cleanTables(db) {
     return db.transaction(trx => 
         trx.raw(
             `TRUNCATE
-            jollylube_users,
-            jollylube_times
+            users,
+            apt_times
             `
         )
             .then(() => 
                 Promise.all([
-                    trx.raw(`ALTER SEQUENCE jollylube_times_id_seq minvalue 0 START WITH 1`),
-                    trx.raw(`ALTER SEQUENCE jollylube_users_id_seq minvalue 0 START WITH 1`),
-                    trx.raw(`SELECT setval('jollylube_times_id_seq', 0)`),
-                    trx.raw(`SELECT setval('jollylube_users_id_seq', 0)`),
+                    trx.raw(`ALTER SEQUENCE apt_times_id_seq minvalue 0 START WITH 1`),
+                    trx.raw(`ALTER SEQUENCE users_id_seq minvalue 0 START WITH 1`),
+                    trx.raw(`SELECT setval('apt_times_id_seq', 0)`),
+                    trx.raw(`SELECT setval('users_id_seq', 0)`),
                 ])
             )
     );
@@ -61,11 +61,11 @@ function seedUsers(db, users) {
       ...user,
       password: bcrypt.hashSync(user.password, 1)
     }))
-    return db.into('jollylube_users').insert(preppedUsers)
+    return db.into('users').insert(preppedUsers)
       .then(() => 
       // update the auto sequence to stay in sync
       db.raw(
-        `SELECT setval('jollylube_users_id_seq', ?)`,
+        `SELECT setval('users_id_seq', ?)`,
         [users[users.length-1].id]
       )
     )

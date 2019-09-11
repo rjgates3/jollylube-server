@@ -1,4 +1,4 @@
-ALTER TABLE jollylube_times
+ALTER TABLE apt_times
     ADD COLUMN
-        userid INTEGER REFERENCES jollylube_users(id)
+        user_id INTEGER REFERENCES users(id)
         on DELETE SET NULL;

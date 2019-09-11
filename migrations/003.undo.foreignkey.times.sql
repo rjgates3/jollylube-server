@@ -1,2 +1,2 @@
-ALTER TABLE jollylube_times
-    DROP column userid
+ALTER TABLE apt_times
+    DROP column user_id

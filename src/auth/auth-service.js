@@ -6,7 +6,7 @@ const config = require('../config');
 
 const AuthService = {
     getUserWithUserName(db, user_name) {
-        return db('jollylube_users')
+        return db('users')
             .where({ user_name })
             .first();
     },
@@ -17,7 +17,7 @@ const AuthService = {
             .split(':');
     },
     comparePasswords(password, hash) {
-        return bcrypt.compare(password, hash)
+        return bcrypt.compare(password, hash);
     },
     createJwt(subject, payload) {
         return jwt.sign(payload, config.JWT_SECRET, {

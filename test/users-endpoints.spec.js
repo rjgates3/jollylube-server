@@ -41,7 +41,7 @@ describe('Users Endpoints', function () {
                     .expect(201)
                     .expect(res =>
                         db
-                            .from('jollylube_users')
+                            .from('users')
                             .select('*')
                             .where({ id: res.body.id })
                             .first()
