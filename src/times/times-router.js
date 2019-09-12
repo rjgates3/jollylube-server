@@ -15,13 +15,15 @@ const jsonParser = express.json();
 
 
 // should the server return all appointment times?
+
+//need another route /api/times/year/month to get appts for a given month
 timesRouter
     .route('/')
-    // .all(requireAuth)
+    .all(requireAuth)
     .get((req, res, next) => {
         TimesService.getAll(req.app.get('db'))
             .then(times => {
-                res.json(TimesService.serializeAllTimes(times));
+                return res.json(TimesService.serializeAllTimes(times));
             })
             .catch(next);
     })
