@@ -23,7 +23,7 @@ timesRouter
     .get((req, res, next) => {
         TimesService.getAll(req.app.get('db'))
             .then(times => {
-                return res.json(TimesService.serializeAllTimes(times));
+                res.json( times.map( TimesService.serializeTime ));
             })
             .catch(next);
     })
