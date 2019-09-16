@@ -4,6 +4,6 @@ CREATE TABLE users (
     full_name TEXT NOT NULL,
     password TEXT NOT NULL,
     date_created TIMESTAMPTZ NOT NULL DEFAULT now(),
-    date_modified TIMESTAMP
+    date_modified TIMESTAMPTZ
 );
 

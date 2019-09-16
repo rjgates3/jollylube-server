@@ -18,71 +18,86 @@ const jsonParser = express.json();
 
 //need another route /api/times/year/month to get appts for a given month
 timesRouter
-    .route('/')
+    .route('/times')
     .all(requireAuth)
     .get((req, res, next) => {
         TimesService.getAll(req.app.get('db'))
-            .then(times => {
-                res.json( times.map( TimesService.serializeTime ));
+            .then(appts => {
+                res.json( appts.map( TimesService.serializeTime ));
             })
             .catch(next);
     })
     .post(jsonParser, (req, res, next) => {
-        const { apt_date } =req.body
+        const { appt_date } =req.body
         
-        if(!apt_date) return res.status(401).json({ error: 'A apt_date stamp is required' })
+        if(!appt_date) return res.status(401).json({ error: 'An appt_date timestamp is required' })
         
-        //are the apt_dates unique?
+        //are the appt_dates unique?
         
-        const newAptTime = { 
-            apt_date: apt_date,
+        const newApptTime = { 
+            appt_date: appt_date,
             available: true,
         }
 
         TimesService.insertAptTime(
             req.app.get('db'),
-            newAptTime
+            newApptTime
         )
-            .then(aptTime => {
+            .then(apptTime => {
                 res
                     .status(200)
-                    .location(path.posix.join(req.originalUrl, `/${aptTime.id}`))
-                    .json(TimesService.serializeTime(aptTime))
+                    .location(path.posix.join(req.originalUrl, `/${apptTime.id}`))
+                    .json(TimesService.serializeTime(apptTime))
             })
-
-
-
         .catch(next);
     })
 
 timesRouter
-    .route('/:aptId') 
+    .route('/times/:apptId') 
     .all(requireAuth)
     .all(checkTimeExists)
-    .get((req, res) => {
+    .get((req, res) => { 
         res.json(TimesService.serializeTime(res.time))
     })
     .patch(jsonParser, (req, res, next) => {
         
         //check if apt time is available
 
-        console.log(`${req.user.id}, ${typeof req.user.id}`);
+        console.log(`${req.user.id}, ${req.params.apptId}, ${typeof req.params.apptId}`);
         
         const newAptFields = {
-          user_id: req.user.id
-          // available: false
+          user_id: req.user.id,
+          available: false
         };
         
         TimesService.update(
           req.app.get('db'),
-          req.params.aptId,
+          req.params.apptId,
           newAptFields
         )
-            .then(aptTime => {
+            .then(appt => {
                 res.status(200)
-                    .json(TimesService.serializeTime(aptTime))
+                    .json(TimesService.serializeTime(appt))
             })
             .catch(next);
+    })
+
+timesRouter
+    .route('/userappts')
+    .all(requireAuth)
+    .get((req, res, next) => {
+        TimesService.getAll(req.app.get('db'))
+            .then(appts => {
+                console.log('starting to filter')
+                console.log(appts);
+                return appts = appts.filter(appt => appt.user_id === req.user.id)
+            })
+                .then(appts => {
+                    console.log(appts)
+                    res.status(200)
+                        .json(TimesService.serializeAllTimes(appts))
+                })
+                    .catch(next)
     })
 
 /* async/await syntax for promises */
@@ -90,7 +105,7 @@ async function checkTimeExists(req, res, next) {
     try {
       const time = await TimesService.getById(
         req.app.get('db'),
-        req.params.aptId
+        req.params.apptId
       )
   
       if (!time)

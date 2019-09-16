@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS apt_times;
+DROP TABLE IF EXISTS appt_times;

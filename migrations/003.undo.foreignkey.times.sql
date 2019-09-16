@@ -1,2 +1,2 @@
-ALTER TABLE apt_times
+ALTER TABLE appt_times
     DROP column user_id

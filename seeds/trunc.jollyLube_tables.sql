@@ -1,4 +1,4 @@
 TRUNCATE
     users,
-    apt_times
+    appt_times
     RESTART IDENTITY CASCADE;

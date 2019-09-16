@@ -1,3 +1,24 @@
 {"message":"connect ECONNREFUSED 127.0.0.1:5432","level":"error"}
 {"message":"connect ECONNREFUSED 127.0.0.1:5432","level":"error"}
 {"message":"connect ECONNREFUSED 127.0.0.1:5432","level":"error"}
+{"message":"connect ECONNREFUSED 127.0.0.1:5432","level":"error"}
+{"message":"connect ECONNREFUSED 127.0.0.1:5432","level":"error"}
+{"message":"connect ECONNREFUSED 127.0.0.1:5432","level":"error"}
+{"message":"select * from \"apt_times\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"id\"","level":"error"}
+{"message":"select * from \"apt_times\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"id\"","level":"error"}
+{"message":"select * from \"apt_times\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"id\"","level":"error"}
+{"message":"select * from \"apt_times\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"id\"","level":"error"}
+{"message":"select * from \"apt_times\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"id\"","level":"error"}
+{"message":"select * from \"apt_times\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"id\"","level":"error"}
+{"message":"select * from \"apt_times\" - relation \"apt_times\" does not exist","level":"error"}
+{"message":"select * from \"appt_times\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"userappts\"","level":"error"}
+{"message":"select * from \"appt_times\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"userappts\"","level":"error"}
+{"message":"select * from \"appt_times\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"userappts\"","level":"error"}
+{"message":"this.setSignatureAuto(...).getSignature is not a function","level":"error"}
+{"message":"this.setSignatureAuto(...).getSignature is not a function","level":"error"}
+{"message":"Cannot read property 'map' of undefined","level":"error"}
+{"message":"Cannot read property 'map' of undefined","level":"error"}
+{"message":"Cannot read property 'map' of undefined","level":"error"}
+{"message":"Cannot read property 'map' of undefined","level":"error"}
+{"message":"Cannot read property 'map' of undefined","level":"error"}
+{"message":"Cannot read property 'map' of undefined","level":"error"}

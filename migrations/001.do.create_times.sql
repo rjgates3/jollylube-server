@@ -1,5 +1,5 @@
-CREATE TABLE apt_times (
+CREATE TABLE appt_times (
     id SERIAL PRIMARY KEY,
-    apt_date TIMESTAMPTZ NOT NULL,
-    available TEXT default NULL
+    appt_date TIMESTAMPTZ NOT NULL,
+    available BOOL default NULL
 )

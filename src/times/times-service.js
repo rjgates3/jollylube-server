@@ -3,7 +3,7 @@
 const xss = require('xss');
 const Treeize = require('treeize');
 
-const dbTimesTable = 'apt_times';
+const dbTimesTable = 'appt_times';
 
 const TimesService = {
 
@@ -32,7 +32,7 @@ const TimesService = {
 
         return {
             id: timeData.id,
-            apt_date: xss(timeData.apt_date),
+            appt_date: xss(timeData.appt_date),
             available: xss(timeData.available),
             user_id: timeData.user_id
         };
