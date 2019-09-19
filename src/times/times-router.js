@@ -8,15 +8,6 @@ const { requireAuth } = require('../middleware/jwt-auth');
 const timesRouter = express.Router();
 const jsonParser = express.json();
 
-//return appointment times for a given date 
-//return a given appointment time given a timeid  --done
-//update a given appointment time given a timeid  --done
-//return all appointment times for a given userName/user_name 
-
-
-// should the server return all appointment times?
-
-//need another route /api/times/year/month to get appts for a given month
 timesRouter
     .route('/times')
     .all(requireAuth)
@@ -28,11 +19,9 @@ timesRouter
             .catch(next);
     })
     .post(jsonParser, (req, res, next) => {
-        const { appt_date } =req.body
+        const { appt_date } = req.body
         
         if(!appt_date) return res.status(401).json({ error: 'An appt_date timestamp is required' })
-        
-        //are the appt_dates unique?
         
         const newApptTime = { 
             appt_date: appt_date,
@@ -45,7 +34,7 @@ timesRouter
         )
             .then(apptTime => {
                 res
-                    .status(200)
+                    .status(201)
                     .location(path.posix.join(req.originalUrl, `/${apptTime.id}`))
                     .json(TimesService.serializeTime(apptTime))
             })
@@ -56,20 +45,28 @@ timesRouter
     .route('/times/:apptId') 
     .all(requireAuth)
     .all(checkTimeExists)
-    .get((req, res) => { 
-        res.json(TimesService.serializeTime(res.time))
-    })
     .patch(jsonParser, (req, res, next) => {
         
-        //check if apt time is available
+        //check if appt time user_id is empty
+        let apptTime = TimesService.getById(
+            req.app.get('db'),
+            req.params.apptId
+        )
+        //if called the first, or odd time, it sets fields to users info, and is not available
+        if(apptTime.length === 0) {
+            const newAptFields = {
+              user_id: req.user.id,
+              available: false
+            };
+        } 
+        //if called second, or even time: user id is empty, and is available
+        else {
+            const newAptFields = {
+                user_id: '',
+                available: true
+              };
+        }
 
-        console.log(`${req.user.id}, ${req.params.apptId}, ${typeof req.params.apptId}`);
-        
-        const newAptFields = {
-          user_id: req.user.id,
-          available: false
-        };
-        
         TimesService.update(
           req.app.get('db'),
           req.params.apptId,
@@ -88,12 +85,9 @@ timesRouter
     .get((req, res, next) => {
         TimesService.getAll(req.app.get('db'))
             .then(appts => {
-                console.log('starting to filter')
-                console.log(appts);
                 return appts = appts.filter(appt => appt.user_id === req.user.id)
             })
                 .then(appts => {
-                    console.log(appts)
                     res.status(200)
                         .json(TimesService.serializeAllTimes(appts))
                 })
