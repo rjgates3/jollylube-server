@@ -22,3 +22,12 @@
 {"message":"Cannot read property 'map' of undefined","level":"error"}
 {"message":"Cannot read property 'map' of undefined","level":"error"}
 {"message":"Cannot read property 'map' of undefined","level":"error"}
+{"message":"newAptFields is not defined","level":"error"}
+{"message":"newApptFields is not defined","level":"error"}
+{"message":"newApptFields is not defined","level":"error"}
+{"message":"newApptFields is not defined","level":"error"}
+{"message":"select * from \"appt_times\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"undefined\"","level":"error"}
+{"message":"select * from \"appt_times\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"undefined\"","level":"error"}
+{"message":"update \"appt_times\" set \"user_id\" = $1, \"available\" = $2 where \"id\" = $3 returning * - invalid input syntax for integer: \"\"","level":"error"}
+{"message":"update \"appt_times\" set \"user_id\" = $1, \"available\" = $2 where \"id\" = $3 returning * - invalid input syntax for integer: \"\"","level":"error"}
+{"message":"update \"appt_times\" set \"user_id\" = $1, \"available\" = $2 where \"id\" = $3 returning * - invalid input syntax for integer: \"\"","level":"error"}

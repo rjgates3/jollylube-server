@@ -52,25 +52,45 @@ timesRouter
             req.app.get('db'),
             req.params.apptId
         )
-        //if called the first, or odd time, it sets fields to users info, and is not available
-        if(apptTime.length === 0) {
-            const newAptFields = {
-              user_id: req.user.id,
-              available: false
-            };
-        } 
-        //if called second, or even time: user id is empty, and is available
-        else {
-            const newAptFields = {
-                user_id: '',
-                available: true
-              };
-        }
+        
+        const newApptFields = {
+            user_id: req.user.id,
+            available: false
+        };
 
         TimesService.update(
           req.app.get('db'),
           req.params.apptId,
-          newAptFields
+          newApptFields
+        )
+            .then(appt => {
+                res.status(200)
+                    .json(TimesService.serializeTime(appt))
+            })
+            .catch(next);
+    })
+
+timesRouter
+    .route('/times/cancelAppt/:apptId') 
+    .all(requireAuth)
+    .all(checkTimeExists)
+    .patch(jsonParser, (req, res, next) => {
+        
+        //check if appt time user_id is empty
+        let apptTime = TimesService.getById(
+            req.app.get('db'),
+            req.params.apptId
+        )
+        
+        const newApptFields = {
+            user_id: null,
+            available: true
+        };
+
+        TimesService.update(
+          req.app.get('db'),
+          req.params.apptId,
+          newApptFields
         )
             .then(appt => {
                 res.status(200)
