@@ -9,7 +9,7 @@ const timesRouter = express.Router();
 const jsonParser = express.json();
 
 timesRouter
-    .route('/times')
+    .route('/')
     .all(requireAuth)
     .get((req, res, next) => {
         TimesService.getAll(req.app.get('db'))
@@ -42,7 +42,7 @@ timesRouter
     })
 
 timesRouter
-    .route('/times/:apptId') 
+    .route('/:apptId') 
     .all(requireAuth)
     .all(checkTimeExists)
     .patch(jsonParser, (req, res, next) => {
@@ -71,7 +71,7 @@ timesRouter
     })
 
 timesRouter
-    .route('/times/cancelAppt/:apptId') 
+    .route('/cancelAppt/:apptId') 
     .all(requireAuth)
     .all(checkTimeExists)
     .patch(jsonParser, (req, res, next) => {

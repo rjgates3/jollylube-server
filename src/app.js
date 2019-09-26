@@ -25,7 +25,7 @@ app.use(helmet());
 
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
-app.use('/api', timesRouter);
+app.use('/api/times', timesRouter);
 
 
 app.use(errorHandler);
