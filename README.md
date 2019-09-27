@@ -35,7 +35,7 @@ PATCH /api/times/cancelAppt/:apptId
 
 Requires a valid authorization header, updates the specified appointment (apptId) to not include the user's userId. It undoes what PATCH api/times/:apptId does.
 
-GET /api/times/userappts
+GET /api/userappts
 
 Requires a valid authorization header, returns all of a users appointments.
 

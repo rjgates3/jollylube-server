@@ -41,34 +41,7 @@ timesRouter
         .catch(next);
     })
 
-timesRouter
-    .route('/:apptId') 
-    .all(requireAuth)
-    .all(checkTimeExists)
-    .patch(jsonParser, (req, res, next) => {
-        
-        //check if appt time user_id is empty
-        let apptTime = TimesService.getById(
-            req.app.get('db'),
-            req.params.apptId
-        )
-        
-        const newApptFields = {
-            user_id: req.user.id,
-            available: false
-        };
 
-        TimesService.update(
-          req.app.get('db'),
-          req.params.apptId,
-          newApptFields
-        )
-            .then(appt => {
-                res.status(200)
-                    .json(TimesService.serializeTime(appt))
-            })
-            .catch(next);
-    })
 
 timesRouter
     .route('/cancelAppt/:apptId') 
@@ -103,6 +76,7 @@ timesRouter
     .route('/userappts')
     .all(requireAuth)
     .get((req, res, next) => {
+        console.log('----------------- started getting appts --------------')
         TimesService.getAll(req.app.get('db'))
             .then(appts => {
                 return appts = appts.filter(appt => appt.user_id === req.user.id)
@@ -113,6 +87,36 @@ timesRouter
                 })
                     .catch(next)
     })
+
+    timesRouter
+    .route('/:apptId') 
+    .all(requireAuth)
+    .all(checkTimeExists)
+    .patch(jsonParser, (req, res, next) => {
+        
+        //check if appt time user_id is empty
+        let apptTime = TimesService.getById(
+            req.app.get('db'),
+            req.params.apptId
+        )
+        
+        const newApptFields = {
+            user_id: req.user.id,
+            available: false
+        };
+
+        TimesService.update(
+          req.app.get('db'),
+          req.params.apptId,
+          newApptFields
+        )
+            .then(appt => {
+                res.status(200)
+                    .json(TimesService.serializeTime(appt))
+            })
+            .catch(next);
+    })
+
 
 /* async/await syntax for promises */
 async function checkTimeExists(req, res, next) {
