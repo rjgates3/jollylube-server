@@ -76,7 +76,7 @@ timesRouter
     .route('/userappts')
     .all(requireAuth)
     .get((req, res, next) => {
-        console.log('----------------- started getting appts --------------')
+        // console.log('----------------- started getting appts --------------')
         TimesService.getAll(req.app.get('db'))
             .then(appts => {
                 return appts = appts.filter(appt => appt.user_id === req.user.id)
